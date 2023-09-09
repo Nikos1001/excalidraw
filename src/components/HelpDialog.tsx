@@ -19,24 +19,6 @@ const Header = () => (
       {t("helpDialog.documentation")}
       <div className="HelpDialog__link-icon">{ExternalLinkIcon}</div>
     </a>
-    <a
-      className="HelpDialog__btn"
-      href="https://blog.excalidraw.com"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      {t("helpDialog.blog")}
-      <div className="HelpDialog__link-icon">{ExternalLinkIcon}</div>
-    </a>
-    <a
-      className="HelpDialog__btn"
-      href="https://github.com/excalidraw/excalidraw/issues"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      {t("helpDialog.github")}
-      <div className="HelpDialog__link-icon">{ExternalLinkIcon}</div>
-    </a>
   </div>
 );
 

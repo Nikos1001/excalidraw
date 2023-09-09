@@ -266,35 +266,35 @@ export const actionSetEmbeddableAsActiveTool = register({
   },
 });
 
-const validateHostname = (
-  url: string,
-  /** using a Set assumes it already contains normalized bare domains */
-  allowedHostnames: Set<string> | string,
-): boolean => {
-  try {
-    const { hostname } = new URL(url);
+// const validateHostname = (
+//   url: string,
+//   /** using a Set assumes it already contains normalized bare domains */
+//   allowedHostnames: Set<string> | string,
+// ): boolean => {
+//   try {
+//     const { hostname } = new URL(url);
 
-    const bareDomain = hostname.replace(/^www\./, "");
-    const bareDomainWithFirstSubdomainWildcarded = bareDomain.replace(
-      /^([^.]+)/,
-      "*",
-    );
+//     const bareDomain = hostname.replace(/^www\./, "");
+//     const bareDomainWithFirstSubdomainWildcarded = bareDomain.replace(
+//       /^([^.]+)/,
+//       "*",
+//     );
 
-    if (allowedHostnames instanceof Set) {
-      return (
-        ALLOWED_DOMAINS.has(bareDomain) ||
-        ALLOWED_DOMAINS.has(bareDomainWithFirstSubdomainWildcarded)
-      );
-    }
+//     if (allowedHostnames instanceof Set) {
+//       return (
+//         ALLOWED_DOMAINS.has(bareDomain) ||
+//         ALLOWED_DOMAINS.has(bareDomainWithFirstSubdomainWildcarded)
+//       );
+//     }
 
-    if (bareDomain === allowedHostnames.replace(/^www\./, "")) {
-      return true;
-    }
-  } catch (error) {
-    // ignore
-  }
-  return false;
-};
+//     if (bareDomain === allowedHostnames.replace(/^www\./, "")) {
+//       return true;
+//     }
+//   } catch (error) {
+//     // ignore
+//   }
+//   return true;
+// };
 
 export const extractSrc = (htmlString: string): string => {
   const twitterMatch = htmlString.match(RE_TWITTER_EMBED);
@@ -321,30 +321,31 @@ export const embeddableURLValidator = (
   if (!url) {
     return false;
   }
-  if (validateEmbeddable != null) {
-    if (typeof validateEmbeddable === "function") {
-      const ret = validateEmbeddable(url);
-      // if return value is undefined, leave validation to default
-      if (typeof ret === "boolean") {
-        return ret;
-      }
-    } else if (typeof validateEmbeddable === "boolean") {
-      return validateEmbeddable;
-    } else if (validateEmbeddable instanceof RegExp) {
-      return validateEmbeddable.test(url);
-    } else if (Array.isArray(validateEmbeddable)) {
-      for (const domain of validateEmbeddable) {
-        if (domain instanceof RegExp) {
-          if (url.match(domain)) {
-            return true;
-          }
-        } else if (validateHostname(url, domain)) {
-          return true;
-        }
-      }
-      return false;
-    }
-  }
+  return true;
+  // if (validateEmbeddable != null) {
+  //   if (typeof validateEmbeddable === "function") {
+  //     const ret = validateEmbeddable(url);
+  //     // if return value is undefined, leave validation to default
+  //     if (typeof ret === "boolean") {
+  //       return ret;
+  //     }
+  //   } else if (typeof validateEmbeddable === "boolean") {
+  //     return validateEmbeddable;
+  //   } else if (validateEmbeddable instanceof RegExp) {
+  //     return validateEmbeddable.test(url);
+  //   } else if (Array.isArray(validateEmbeddable)) {
+  //     for (const domain of validateEmbeddable) {
+  //       if (domain instanceof RegExp) {
+  //         if (url.match(domain)) {
+  //           return true;
+  //         }
+  //       } else if (validateHostname(url, domain)) {
+  //         return true;
+  //       }
+  //     }
+  //     return false;
+  //   }
+  // }
 
-  return validateHostname(url, ALLOWED_DOMAINS);
+  // return validateHostname(url, ALLOWED_DOMAINS);
 };

@@ -17,7 +17,7 @@ import {
   TrashIcon,
   usersIcon,
 } from "../icons";
-import { GithubIcon, DiscordIcon, TwitterIcon } from "../icons";
+import { DiscordIcon, TwitterIcon } from "../icons";
 import DropdownMenuItem from "../dropdownMenu/DropdownMenuItem";
 import DropdownMenuItemLink from "../dropdownMenu/DropdownMenuItemLink";
 import {
@@ -243,13 +243,6 @@ Export.displayName = "Export";
 
 export const Socials = () => (
   <>
-    <DropdownMenuItemLink
-      icon={GithubIcon}
-      href="https://github.com/excalidraw/excalidraw"
-      aria-label="GitHub"
-    >
-      GitHub
-    </DropdownMenuItemLink>
     <DropdownMenuItemLink
       icon={DiscordIcon}
       href="https://discord.gg/UexuTaE"
