@@ -303,7 +303,7 @@ export const DEFAULT_ELEMENT_PROPS: {
   fillStyle: "hachure",
   strokeWidth: 1,
   strokeStyle: "solid",
-  roughness: 1,
+  roughness: 0,
   opacity: 100,
   locked: false,
 };
